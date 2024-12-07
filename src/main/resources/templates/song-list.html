@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Website</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="../static/css/song-list.css">
+</head>
+<body>
+<h1>Music List</h1>
+<button id="btn-add-song"><a href="/add-song" >Add Music</a></button>
+<table>
+  <thead>
+  <tr>
+    <th>No</th>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>Play</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="song, stat : ${songs}">
+    <td th:text="${stat.index+1}"></td>
+    <td th:text="${song.title}"></td>
+    <td th:text="${song.artist}"></td>
+    <td>
+      <audio controls>
+        <source th:src="${song.url}" type="audio/mpeg">
+      </audio>
+    </td>
+    <td><a th:href="@{/update-song(id=${song.id})}">Edit</a></td>
+    <td><a th:href="@{/delete-song(id=${song.id})}" onclick="return confirm('Are you sure you want to delete this song?')">Delete</a></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
